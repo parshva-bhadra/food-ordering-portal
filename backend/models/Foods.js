@@ -3,27 +3,20 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const UserSchema = new Schema({
-	name: {
+	itemname: {
 		type: String,
 		required: true
 	},
-	email: {
-		type: String,
+	price: {
+		type: Number,
 		required: true
 	},
-	contact:{
+	Rating:{
 		type: String,
-		required: true
+		required: true,
+        default: 0
 	},
-	age:{
-		type: String,
-		required: true
-	},
-	batch:{
-		type: String,
-		required: true
-	},
-	password:{
+	type:{
 		type: String,
 		required: true
 	}

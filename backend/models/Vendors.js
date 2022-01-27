@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // Create Schema
-const UserSchema = new Schema({
+const VendorSchema = new Schema({
 	name: {
 		type: String,
 		required: true
@@ -15,11 +15,15 @@ const UserSchema = new Schema({
 		type: String,
 		required: true
 	},
-	age:{
+	shopname:{
 		type: String,
 		required: true
 	},
-	batch:{
+	openingtime:{
+		type: String,
+		required: true
+	},
+    closingtime:{
 		type: String,
 		required: true
 	},
@@ -29,4 +33,4 @@ const UserSchema = new Schema({
 	}
 });
 
-module.exports = User = mongoose.model("Users", UserSchema);
+module.exports = Vendor = mongoose.model("Vendors", VendorSchema);
