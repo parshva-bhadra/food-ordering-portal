@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "mongoose-type-email": "^1.1.2"
+  }
+}

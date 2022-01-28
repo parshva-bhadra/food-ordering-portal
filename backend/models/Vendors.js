@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+require('mongoose-type-email');
 
 // Create Schema
 const VendorSchema = new Schema({
@@ -8,8 +9,9 @@ const VendorSchema = new Schema({
 		required: true
 	},
 	email: {
-		type: String,
-		required: true
+		type: mongoose.SchemaTypes.Email,
+		required: true,
+		unique: true
 	},
 	contact:{
 		type: String,
@@ -24,6 +26,10 @@ const VendorSchema = new Schema({
 		required: true
 	},
     closingtime:{
+		type: String,
+		required: true
+	},
+	type:{
 		type: String,
 		required: true
 	},

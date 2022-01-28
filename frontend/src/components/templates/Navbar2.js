@@ -5,9 +5,9 @@ import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-const Navbar = () => {
+const Navbar2 = () => {
   const navigate = useNavigate();
-
+  const type = localStorage.getItem("type");
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -16,16 +16,24 @@ const Navbar = () => {
             variant="h6"
             component="div"
             sx={{ cursor: "pointer" }}
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/profile")}
           >
-            Canteen Portal
+            My Profile
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
-          <Button color="inherit" onClick={() => navigate("/register")}>
-            Register
+          <Button color="inherit" onClick={() => navigate("/profile/users")}>
+            Dashboard
           </Button>
-          <Button color="inherit" onClick={() => navigate("/login")}>
-            Login
+          <Button color="inherit" onClick={() => navigate("/profile/")}>
+            My Profile
+          </Button>
+          {type == "user" &&
+          <Button color="inherit" onClick={() => navigate("/profile/wallet")}>
+            Wallet
+          </Button>
+          }
+          <Button color="inherit" onClick={() => navigate("/login/")}>
+            Logout
           </Button>
         </Toolbar>
       </AppBar>
@@ -33,4 +41,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Navbar2;

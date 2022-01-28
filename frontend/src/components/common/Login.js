@@ -5,10 +5,12 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Navigate, useNavigate } from "react-router-dom";
 
-localStorage.clear();
-
 const Login = (props) => {
     const navigate = useNavigate();
+
+    useEffect(() => {
+        localStorage.clear();
+      }, []);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -39,11 +41,18 @@ const Login = (props) => {
         axios
             .post("http://localhost:4000/user/login", User)
             .then((response) => {
-                alert(response.data);
-                console.log(response.data);
-                navigate("/");
-            });
-        
+                if (response.data != null)
+                {
+                    console.log(response.data);
+                    localStorage.setItem("email",response.data.email);
+                    localStorage.setItem("type",response.data.type);
+                    navigate("/profile");
+                }
+                else
+                {
+                    console.log("login failed");
+                }
+            }); 
         resetInputs();
     };
 
@@ -61,6 +70,7 @@ const Login = (props) => {
                 <TextField
                     label="Password"
                     variant="outlined"
+                    type="password"
                     value={password}
                     onChange={onChangePassword}
                 />

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+require('mongoose-type-email');
 
 // Create Schema
 const UserSchema = new Schema({
@@ -8,11 +9,13 @@ const UserSchema = new Schema({
 		required: true
 	},
 	email: {
-		type: String,
-		required: true
+		type: mongoose.SchemaTypes.Email,
+		required: true,
+		unique: true
 	},
 	contact:{
 		type: String,
+		length: 10,
 		required: true
 	},
 	age:{
@@ -23,9 +26,18 @@ const UserSchema = new Schema({
 		type: String,
 		required: true
 	},
+	type:{
+		type: String,
+		required: true
+	},
 	password:{
 		type: String,
 		required: true
+	},
+	wallet:{
+		type: Number,
+		required: true,
+		default: 500
 	}
 });
 

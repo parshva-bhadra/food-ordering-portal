@@ -5,6 +5,7 @@ const Home = (props) => {
   const [email, setEmail] = useState("");
 
   useEffect(() => {
+    localStorage.clear();
     setName("Dass TAs");
   }, []);
 

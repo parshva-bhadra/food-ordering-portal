@@ -73,6 +73,7 @@ const Register = (props) => {
     setOpeningtime("");
     setClosingtime("");
     setPassword("");
+    setType("");
   };
 
   const onSubmit = (event) => {
@@ -104,6 +105,7 @@ const Register = (props) => {
 
   return (
     <Grid container align={"center"} spacing={2}>
+      
       <Grid item xs={12}>
         <Box sx={{ maxWidth: 500 }}>
           <FormControl fullWidth>
@@ -121,7 +123,9 @@ const Register = (props) => {
           </FormControl>
         </Box>
       </Grid>
+
       <Grid item xs={12}></Grid>
+      
       {type === "user" &&
         <Grid container align={"center"} spacing={2}>
           <Grid item xs={12}>
@@ -172,7 +176,6 @@ const Register = (props) => {
                 <MenuItem value={"UG3"}>UG3</MenuItem>
                 <MenuItem value={"UG4"}>UG4</MenuItem>
                 <MenuItem value={"UG5"}>UG5</MenuItem>
-                <MenuItem value={"Other"}>Other</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -180,12 +183,14 @@ const Register = (props) => {
             <TextField
               label="Create Password"
               variant="outlined"
+              type="password"
               value={password}
               onChange={onChangePassword}
             />
           </Grid>
         </Grid>
       }
+
       {type === "vendor" &&
         <Grid container align={"center"} spacing={2}>
           <Grid item xs={12}>
@@ -240,17 +245,20 @@ const Register = (props) => {
             <TextField
               label="Create Password"
               variant="outlined"
+              type="password"
               value={password}
               onChange={onChangePassword}
             />
           </Grid>
         </Grid>
       }
+
       <Grid item xs={12}>
         <Button variant="contained" onClick={onSubmit}>
           Register
         </Button>
       </Grid>
+      
     </Grid>
   );
 };
