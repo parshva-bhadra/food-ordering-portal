@@ -8,6 +8,9 @@ import Login from "./components/common/Login";
 import Navbar from "./components/templates/Navbar";
 import Profile from "./components/users/Profile";
 import Wallet from "./components/users/Wallet";
+import Addfood from "./components/users/Addfood";
+import Editfood from "./components/users/Editfood";
+import Menu from "./components/users/Menu";
 import Navbar2 from "./components/templates/Navbar2";
 
 const Layout = () => {
@@ -50,6 +53,9 @@ function App() {
           {/* <Route path="login" element={<Login />} /> */}
           <Route path="/profile/users" element={<UsersList />} />
           <Route path="/profile/wallet" element={<Wallet />} />
+          <Route path="/profile/addfood" element={<Addfood />} />
+          <Route path="/profile/menu" element={<Menu />} />
+          <Route path="/profile/edit/:id" element={<Editfood />} />
         </Route>
       </Routes>
     </BrowserRouter>

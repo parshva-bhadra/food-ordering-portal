@@ -3,7 +3,8 @@ import axios from "axios";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Login = (props) => {
     const navigate = useNavigate();
@@ -46,6 +47,7 @@ const Login = (props) => {
                     console.log(response.data);
                     localStorage.setItem("email",response.data.email);
                     localStorage.setItem("type",response.data.type);
+                    localStorage.setItem("vendor_id",response.data._id);
                     navigate("/profile");
                 }
                 else

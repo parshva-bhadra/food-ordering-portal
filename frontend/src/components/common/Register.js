@@ -105,7 +105,7 @@ const Register = (props) => {
 
   return (
     <Grid container align={"center"} spacing={2}>
-      
+
       <Grid item xs={12}>
         <Box sx={{ maxWidth: 500 }}>
           <FormControl fullWidth>
@@ -125,7 +125,7 @@ const Register = (props) => {
       </Grid>
 
       <Grid item xs={12}></Grid>
-      
+
       {type === "user" &&
         <Grid container align={"center"} spacing={2}>
           <Grid item xs={12}>
@@ -258,7 +258,7 @@ const Register = (props) => {
           Register
         </Button>
       </Grid>
-      
+
     </Grid>
   );
 };

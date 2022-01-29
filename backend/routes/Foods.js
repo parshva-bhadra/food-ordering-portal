@@ -3,7 +3,7 @@ var router = express.Router();
 
 const Food = require("../models/Foods");
 
-router.get("/", (req, res) => {
+router.post("/", (req, res) => {
     Food.find((err, users) => {
         if (err) {
             console.log(err);
@@ -22,7 +22,7 @@ router.post("/add", (req, res) => {
         addons: req.body.addons,
         tags: req.body.tags,
         no_of_users: req.body.no_of_users,
-        vendor_email: req.body.vendor_email,
+        vendor_id: req.body.vendor_id,
     });
     newFood.save()
         .then(food => {
@@ -31,6 +31,23 @@ router.post("/add", (req, res) => {
         .catch(err => {
             res.status(400).send(err);
         });
+})
+
+router.post("/find", (req, res) => {
+    const food_id =  req.body.food_id;
+
+    Food.findById( food_id )
+    .then(user => {
+        // Check if user email exists
+        console.log(user);
+        if (!user) {
+            return res.status(404).json(null);
+        }
+        else {
+            res.json(user);
+            return user;
+        }
+    });  
 })
 
 router.post("/update/:id", (req, res) => {
@@ -43,7 +60,7 @@ router.post("/update/:id", (req, res) => {
             food.type = req.body.type;
             food.addons = req.body.addons;
             food.tags = req.body.tags;        
-            no_of_users = req.body.no_of_users;
+            food.no_of_users = req.body.no_of_users;
 
             
             food.save()
@@ -56,7 +73,7 @@ router.post("/update/:id", (req, res) => {
         .catch(err => { console.log(err); })
 })
 
-router.post("/delete/:id", (req, res) => {
+router.delete("/delete/:id", (req, res) => {
     Food.findByIdAndDelete(req.params.id)
         .then(food => {
             console.log("deleted!");

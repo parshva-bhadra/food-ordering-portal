@@ -12,8 +12,8 @@ const FoodSchema = new Schema({
 		type: Number,
 		required: true
 	},
-	vendor_email: {
-		type: mongoose.SchemaTypes.Email,
+	vendor_id: {
+		type: String,
 		require: true
 	},
 	rating:{

@@ -16,9 +16,9 @@ const Navbar2 = () => {
             variant="h6"
             component="div"
             sx={{ cursor: "pointer" }}
-            onClick={() => navigate("/profile")}
+            onClick={() => navigate("/")}
           >
-            My Profile
+            Canteen Portal
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
           <Button color="inherit" onClick={() => navigate("/profile/users")}>
@@ -30,6 +30,16 @@ const Navbar2 = () => {
           {type == "user" &&
           <Button color="inherit" onClick={() => navigate("/profile/wallet")}>
             Wallet
+          </Button>
+          }
+          {type == "vendor" &&
+          <Button color="inherit" onClick={() => navigate("/profile/menu")}>
+            Menu
+          </Button>
+          }
+          {type == "vendor" &&
+          <Button color="inherit" onClick={() => navigate("/profile/addfood")}>
+            Add Item
           </Button>
           }
           <Button color="inherit" onClick={() => navigate("/login/")}>

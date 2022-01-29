@@ -39,7 +39,6 @@ const Wallet = (props) => {
       .post("http://localhost:4000/user/profile", User)
       .then((response) => {
         console.log(response.data)
-        // if (response.data.type == "use
           setId(response.data._id);
           setName(response.data.name);
           setEmail(response.data.email);
