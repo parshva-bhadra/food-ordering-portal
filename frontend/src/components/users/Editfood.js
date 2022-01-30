@@ -129,7 +129,7 @@ const Editfood = (props) => {
             .catch((err) => {
                 console.log(err)
             })
-        navigate("/profile/menu");
+        navigate("/profile/Vendormenu");
         // window.location.reload();
 
         // resetInputs();

@@ -50,6 +50,25 @@ router.post("/find", (req, res) => {
     });  
 })
 
+router.post("/find/:id", (req, res) => {
+    const food_id = req.params.id;
+    
+    Food.findById( food_id )
+    .then(user => {
+        // Check if user email exists
+        console.log(user);
+        if (!user) {
+            return res.status(404).json(null);
+        }
+        else {
+            res.json(user);
+            return user;
+        }
+    });  
+})
+
+
+
 router.post("/update/:id", (req, res) => {
 
     Food.findById(req.params.id)

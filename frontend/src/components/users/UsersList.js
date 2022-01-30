@@ -20,47 +20,103 @@ import SearchIcon from "@mui/icons-material/Search";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
-const UsersList = (props) => {
-  const [users, setUsers] = useState([]);
-  const [sortedUsers, setSortedUsers] = useState([]);
-  const [sortName, setSortName] = useState(true);
-  const [searchText, setSearchText] = useState("");
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:4000/user")
-      .then((response) => {
-        setUsers(response.data);
-        setSortedUsers(response.data);
-        setSearchText("");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
 
-  const sortChange = () => {
-    let usersTemp = users;
-    const flag = sortName;
-    usersTemp.sort((a, b) => {
-      if (a.date != undefined && b.date != undefined) {
-        return (1 - flag * 2) * (new Date(a.date) - new Date(b.date));
-      } else {
-        return 1;
-      }
-    });
-    setUsers(usersTemp);
-    setSortName(!sortName);
-  };
+const Dashboard= (props) => {
 
-  const customFunction = (event) => {
-    console.log(event.target.value);
-    setSearchText(event.target.value);
-  };
+    const [foods, setFoods] = useState([]);
+    const [sortedfoods, setSortedFoods] = useState([]);
+    const [sortName, setSortName] = useState(true);
+    const [searchText, setSearchText] = useState("");
+    const [quantity, setQuantity] = useState(0);
+
+    //const [Order_place, setOrder_Place] = useState([]);
+    
+    const buyer_id = localStorage.getItem("id");
+
+    const onChangeQuantity = (e) => {
+        setQuantity(e.target.value);
+    }
+
+    useEffect( () => {
+
+        axios
+            .get("http://localhost:5000/foods/")
+            .then((response) => {
+                setFoods(response.data);
+                setSortedFoods(response.data);
+                setSearchText("");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+    }, []);
+
+    const sortChange = () => {
+
+        let foodsTemp = foods;
+        const flag = sortName;
+        foodsTemp.sort((a, b) => {
+        if (a.date != undefined && b.date != undefined) {
+            return (1 - flag * 2) * (new Date(a.date) - new Date(b.date));
+        } else {
+            return 1;
+        }
+        });
+        setFoods(foodsTemp);
+        setSortName(!sortName);
+
+    };
+
+    const customFunction = (event) => {
+        console.log(event.target.value);
+        setSearchText(event.target.value);
+    };
+
+    const Buy_Food = (key) => {
+
+        axios
+            .get("http://localhost:5000/foods/" + key)
+            .then(res => {
+                // setOrder_Place(res.data);
+                // console.log(Order_place);
+                // console.log(res.data);
+                const order_ = {
+                    item_name: res.data.item_name,
+                    quantity: quantity,
+                    cost: res.data.price,
+                    rating: res.data.rating,
+                    vendor_id: res.data.vendor_id,
+                    buyer_id: buyer_id,
+                    food_id: res.data._id,
+                    status: "PLACED",
+                    add_on: res.data.add_on
+                };
+                
+                console.log(res.data);
+                console.log(buyer_id);
+
+                axios 
+                    .post("http://localhost:5000/orders/add", order_)
+                    .then( res => {
+                        alert(res.data);
+                        // alert("Order Placed thankyou for shoping")
+                    })
+                    .catch(err => console.log(err))
+            })
+            .catch(err => console.log(err))
+
+    }
+
+
 
   return (
     <div>
+
       <Grid container>
+
+        {/* filter -> */}
         <Grid item xs={12} md={3} lg={3}>
           <List component="nav" aria-label="mailbox folders">
             <ListItem text>
@@ -68,6 +124,8 @@ const UsersList = (props) => {
             </ListItem>
           </List>
         </Grid>
+        
+        {/* search at top.. */}
         <Grid item xs={12} md={9} lg={9}>
           <List component="nav" aria-label="mailbox folders">
             <TextField
@@ -88,9 +146,14 @@ const UsersList = (props) => {
           </List>
         </Grid>
       </Grid>
+
       <Grid container>
+        
+        {/* the things on left side of printing  */}
         <Grid item xs={12} md={3} lg={3}>
           <List component="nav" aria-label="mailbox folders">
+            
+            {/* show salary min and max .... */}
             <ListItem>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
@@ -112,11 +175,14 @@ const UsersList = (props) => {
                 </Grid>
               </Grid>
             </ListItem>
+            
             <Divider />
+
+              {/* select name at bottom has Autocomplete */}
             <ListItem divider>
               <Autocomplete
                 id="combo-box-demo"
-                options={users}
+                options={foods}
                 getOptionLabel={(option) => option.name}
                 fullWidth
                 renderInput={(params) => (
@@ -127,42 +193,87 @@ const UsersList = (props) => {
                   />
                 )}
               />
+
             </ListItem>
+          
           </List>
         </Grid>
+        
+        {/* main list printing */}
         <Grid item xs={12} md={9} lg={9}>
           <Paper>
             <Table size="small">
+
+                {/* heading */}
               <TableHead>
+
                 <TableRow>
                   <TableCell> Sr No.</TableCell>
-                  <TableCell>
+                  {/* <TableCell>
                     {" "}
                     <Button onClick={sortChange}>
                       {sortName ? <ArrowDownwardIcon /> : <ArrowUpwardIcon />}
                     </Button>
                     Date
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell>Name</TableCell>
-                  <TableCell>Email</TableCell>
+                  <TableCell>Price</TableCell>
+                  <TableCell>Rating</TableCell>
+                  <TableCell>Veg</TableCell>
+                  <TableCell>Add On</TableCell>
+                  <TableCell>Tags</TableCell>
+                  <TableCell>Quantity</TableCell>
+                  <TableCell>Buy</TableCell>
                 </TableRow>
+
               </TableHead>
+              
+              {/* body */}
               <TableBody>
-                {users.map((user, ind) => (
+                {foods.map((food, ind) => (
                   <TableRow key={ind}>
                     <TableCell>{ind}</TableCell>
-                    <TableCell>{user.date}</TableCell>
-                    <TableCell>{user.name}</TableCell>
-                    <TableCell>{user.email}</TableCell>
+                    {/* <TableCell>{food.createdAt.substring(0,10)}</TableCell> */}
+                    <TableCell>{food.item_name}</TableCell>
+                    <TableCell>{food.price}</TableCell>
+                    <TableCell>{food.rating}</TableCell>
+                    <TableCell>{String(food.veg)}</TableCell>
+
+                    <TableCell>{food.add_on.map( (current_addon,i) => {
+                        return <li key={i}>{current_addon.food_add_on} for ₹{current_addon.price}</li>
+                    })}</TableCell>
+
+                    <TableCell>{food.tags.map( (current_tag,i) => {
+                        return <li key={i}>{current_tag}</li>
+                    })}</TableCell>
+
+                    <TableCell>
+                        <TextField
+                            label="Quantity"
+                            variant="outlined"
+                            value={quantity}
+                            onChange={onChangeQuantity}
+                            />
+                    </TableCell>
+
+                    <TableCell>
+                      <Button variant="contained" onClick= { () => Buy_Food(food._id)}>
+                        Buy
+                      </Button>
+                    </TableCell>
+
                   </TableRow>
                 ))}
               </TableBody>
+            
             </Table>
           </Paper>
         </Grid>
+      
       </Grid>
+    
     </div>
   );
-};
+}
 
-export default UsersList;
+export default Dashboard;

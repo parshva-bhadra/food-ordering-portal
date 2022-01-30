@@ -38,6 +38,9 @@ const UserSchema = new Schema({
 		type: Number,
 		required: true,
 		default: 500
+	},
+	fav_ids:{
+		type: [String],
 	}
 });
 

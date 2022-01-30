@@ -21,9 +21,16 @@ const Navbar2 = () => {
             Canteen Portal
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
-          <Button color="inherit" onClick={() => navigate("/profile/users")}>
+          {type == "user" &&
+          <Button color="inherit" onClick={() => navigate("/profile/userdashboard")}>
+            My Orders
+          </Button>
+          }
+          {type == "vendor" &&
+          <Button color="inherit" onClick={() => navigate("/profile/vendordashboard")}>
             Dashboard
           </Button>
+          }
           <Button color="inherit" onClick={() => navigate("/profile/")}>
             My Profile
           </Button>
@@ -33,13 +40,28 @@ const Navbar2 = () => {
           </Button>
           }
           {type == "vendor" &&
-          <Button color="inherit" onClick={() => navigate("/profile/menu")}>
+          <Button color="inherit" onClick={() => navigate("/profile/vendormenu")}>
             Menu
+          </Button>
+          }
+          {type == "user" &&
+          <Button color="inherit" onClick={() => navigate("/profile/usermenu")}>
+            Dashboard
+          </Button>
+          }
+          {type == "user" &&
+          <Button color="inherit" onClick={() => navigate("/profile/favourites")}>
+            Favourites
           </Button>
           }
           {type == "vendor" &&
           <Button color="inherit" onClick={() => navigate("/profile/addfood")}>
             Add Item
+          </Button>
+          }
+          {type == "vendor" &&
+          <Button color="inherit" onClick={() => navigate("/profile/stats")}>
+            Statistics
           </Button>
           }
           <Button color="inherit" onClick={() => navigate("/login/")}>

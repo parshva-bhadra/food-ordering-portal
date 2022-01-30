@@ -29,7 +29,7 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { grid } from "@mui/system";
 
 
-const Menu = (props) => {
+const Vendormenu = (props) => {
 
   const vendor_id_local = localStorage.getItem("id");
 
@@ -103,7 +103,6 @@ const Menu = (props) => {
           <Table size="small">
             <TableHead>
               <TableRow>
-                <TableCell> Sr No.</TableCell>
                 <TableCell>Name of Item</TableCell>
                 <TableCell>Price</TableCell>
                 <TableCell>Rating</TableCell>
@@ -118,7 +117,6 @@ const Menu = (props) => {
               {food.map((food, ind) => (
                 <TableRow key={ind}>
                   {food.vendor_id == vendor_id_local && <>
-                    <TableCell>{ind}</TableCell>
                     <TableCell>{food.itemname}</TableCell>
                     <TableCell>{food.price}</TableCell>
                     <TableCell>{food.rating}</TableCell>
@@ -168,4 +166,4 @@ const Menu = (props) => {
   );
 };
 
-export default Menu
+export default Vendormenu

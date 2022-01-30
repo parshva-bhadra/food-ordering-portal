@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-require('mongoose-type-email');
 
 // Create Schema
 const FoodSchema = new Schema({
@@ -17,7 +16,7 @@ const FoodSchema = new Schema({
 		require: true
 	},
 	rating:{
-		type: String,
+		type: Number,
 		required: true,
 		min: 0,
 		max: 5,

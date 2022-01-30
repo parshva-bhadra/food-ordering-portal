@@ -29,6 +29,13 @@ router.get("/vendor", (req, res) => {
     })
 });
 
+router.get("/vendor/:id", (req, res) => {
+    Vendor.findById(req.params.id) 
+        .then(vendor => {
+            res.json(vendor);
+        })
+});
+
 // POST request 
 // Add a user/vendor to database
 router.post("/register", (req, res) => {
