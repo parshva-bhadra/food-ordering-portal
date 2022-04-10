@@ -1,4 +1,4 @@
-# MERN Stack Boilerplate
+# FOOD ORDERING PORTAL
 
 ## Installations
 
